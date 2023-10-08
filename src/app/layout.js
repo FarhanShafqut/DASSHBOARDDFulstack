@@ -13,13 +13,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning >
-      <body className={inter.className}>
+      <body className={inter.className} >
         <Providers>
           <ThemeButton/>
         {children}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
         </Providers>
 
+
+
         </body>
+        
     </html>
   )
 }

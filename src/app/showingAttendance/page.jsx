@@ -166,7 +166,6 @@
 import { useState, useEffect } from "react";
 import { getDocs, collection, doc, deleteDoc } from "firebase/firestore";
 import { db } from '@/app/config/firebase';
-import Sidebar from "../(component)/sidebar/page";
 
 const ShowStudentData = () => {
   const [students, setStudents] = useState([]);
@@ -174,7 +173,7 @@ const ShowStudentData = () => {
   const [loading, setLoading] = useState(false);
 
   const deleteHandler = async (id) => {
-    const docRef = doc(db, 'StudentsData', id);
+    const docRef = doc(db, 'Attendance', id);
     try {
       setId(id);
       setLoading(true);
@@ -190,7 +189,7 @@ const ShowStudentData = () => {
 
   const fetchData = async () => {
     try {
-      const StudentsCollection = collection(db, 'StudentsData');
+      const StudentsCollection = collection(db, 'Attendance');
       const StudentsInfo = await getDocs(StudentsCollection);
       const infoStudents = [];
       StudentsInfo.forEach((e) => {
@@ -214,12 +213,7 @@ const ShowStudentData = () => {
   }, []);
 
   return (
-
-    <div className="p-6 max-w-7xl mx-auto ">
-        <div className="max-w-[10px]">
-
-        </div>
-       
+    <div className="p-6">
       <h1 className="text-2xl font-medium text-gray-900 mb-4">List of Students</h1>
       <table className="w-full border-collapse border border-gray-300">
         <thead>
@@ -227,7 +221,7 @@ const ShowStudentData = () => {
             <th className="p-2">ID</th>
             <th className="p-2">Student Name</th>
             <th className="p-2">Student Email</th>
-            <th className="p-2">Student Course</th>
+            <th className="p-2">Student Attendance</th>
             {/* Add headers for delete and update */}
             <th className="p-2">Actions</th>
           </tr>
@@ -242,7 +236,7 @@ const ShowStudentData = () => {
                 <td className="p-2">{student.id}</td>
                 <td className="p-2">{student.name}</td>
                 <td className="p-2">{student.email}</td>
-                <td className="p-2">{student.course}</td>
+                <td className="p-2">{student.date}</td>
                 <td className="p-2">
                   <button
                     onClick={() => deleteHandler(student.id)}
